@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>react学习之路 | 博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="笔记而已方便自己回顾 npm模块安装机制  执行npm install  安装机制 1.查询node_module中是否存在了指定模块,若存在,不需安装 2.若npm中不存在相关模块,npm会找到安装包的地址,下载安装包到.npm文件目录下,在解压到node_module下   一个工程项目,在npm install之后都干了什么?  npm install 之后,会根据package.json生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react学习之路">
+<meta property="og:url" content="http://example.com/2022/09/14/react%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="笔记而已方便自己回顾 npm模块安装机制  执行npm install  安装机制 1.查询node_module中是否存在了指定模块,若存在,不需安装 2.若npm中不存在相关模块,npm会找到安装包的地址,下载安装包到.npm文件目录下,在解压到node_module下   一个工程项目,在npm install之后都干了什么?  npm install 之后,会根据package.json生">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-14T02:00:41.000Z">
+<meta property="article:modified_time" content="2022-09-14T02:03:56.127Z">
+<meta property="article:author" content="tangjiangxi">
+<meta property="article:tag" content="vue react node solid angular">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">笔记博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-react学习之路" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/09/14/react%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/" class="article-date">
+  <time class="dt-published" datetime="2022-09-14T02:00:41.000Z" itemprop="datePublished">2022-09-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      react学习之路
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>笔记而已方便自己回顾</p>
+<p><strong>npm模块安装机制</strong></p>
+<ul>
+<li><p>执行npm install</p>
+</li>
+<li><p>安装机制</p>
+<p>1.查询node_module中是否存在了指定模块,若存在,不需安装</p>
+<p>2.若npm中不存在相关模块,npm会找到安装包的地址,下载安装包到.npm文件目录下,在解压到node_module下</p>
+</li>
+</ul>
+<p><strong>一个工程项目,在npm install之后都干了什么?</strong></p>
+<ol>
+<li>npm install 之后,会根据package.json生成安装依赖树,首先根据dependencies(生产环境依赖)、devDependencies(开发环境依赖)指定模块确定首层安装依赖.</li>
+</ol>
+<p>工程本身是整棵依赖树的根节点，每个首层依赖模块都是根节点下面的一棵子树，npm 会开启多进程从每个首层依赖模块开始逐步寻找更深层级的节点。</p>
+<ol start="2">
+<li>获取依赖的每一个模快都是是一个递归的过程,获取模块需要确定版本,这里确定的方式依据package.json和package.lock.json.</li>
+</ol>
+<p>比对package.json和package.lock.json文件,若对应模块版本相同,直接按照lock文件确定版本,若不同,lock文件根据依据package.json中的不同进行更新.若两者之间版本能够兼容,lock中版本优先级高一些.</p>
+<ol start="3">
+<li><p>确认版本之后,获取实体,若本地有缓存,直接取本地,若没有缓存,重新下载.</p>
+</li>
+<li><p>npm3之前,模块内部依赖项目模块.不同模块可能会依赖同一种模块,导致依赖树递归的时候某些模块多次安装,为了避免多次安装,npm3之后对依赖树进行扁平化,遍历依赖书所有节点,把相关模块安装在根目录下,且已安装过的模块不在安装.</p>
+</li>
+</ol>
+<p>这里说到安装依赖树的扁平化,可能需要了解一下npm yarn pnpm对包管理的    npm3之后与yarn现在都是采用平铺的方式,防止同样的依赖多次复制.<br>对于pnpm,相同的依赖不采用复制的方式.采用link(软硬链接的形式).只在全局仓库保存一份,其余地方都用link.依赖只存在一份,大大的提升了磁盘空间.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/09/14/react%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/" data-id="cl80z7ita0000yac2akv02v3v" data-title="react学习之路" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/09/14/vue/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          vue
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/09/14/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/09/14/hello/">hello</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/14/vue/">vue</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/14/react%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/">react学习之路</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/14/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 tangjiangxi<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
